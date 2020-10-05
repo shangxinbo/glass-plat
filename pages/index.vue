@@ -32,7 +32,13 @@ export default Vue.extend({
     }
   },
   mounted() {
-    this.$axios('/api/consumer/get/?shang=123').then((res) => {
+    this.$axios({
+      url: '/api/consumer/add',
+      method: 'post',
+      data: JSON.stringify({
+        name: 123,
+      }),
+    }).then((res) => {
       this.data = res.data
     })
   },
