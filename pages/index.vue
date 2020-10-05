@@ -1,65 +1,40 @@
 <template>
   <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">glass-plat</h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+    <el-menu default-active="1" class="nav" mode="horizontal">
+      <el-menu-item index="1">眼镜店-客户检索</el-menu-item>
+    </el-menu>
+    <div class="table">
+      <el-table :data="data" style="width: 100%">
+        <el-table-column prop="name" label="姓名" width="180">
+        </el-table-column>
+        <el-table-column prop="tel" label="电话" width="180"> </el-table-column>
+        <el-table-column prop="vocation" label="职业"> </el-table-column>
+        <el-table-column prop="lens" label="镜片"> </el-table-column>
+        <el-table-column prop="frame" label="镜架"> </el-table-column>
+        <el-table-column prop="lefteye" label="左眼"> </el-table-column>
+        <el-table-column prop="righteye" label="右眼"> </el-table-column>
+        <el-table-column prop="distance" label="瞳距"> </el-table-column>
+        <el-table-column prop="price" label="价格"> </el-table-column>
+        <el-table-column prop="date" label="日期"> </el-table-column>
+        <el-table-column prop="mark" label="备注"> </el-table-column>
+      </el-table>
     </div>
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 
-export default Vue.extend({})
+export default Vue.extend({
+  data: () => {
+    return {
+      data: [],
+    }
+  },
+  mounted() {
+    this.$axios('/api/consumer/list').then((res) => {
+      console.log(res)
+    })
+  },
+})
 </script>
-
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>

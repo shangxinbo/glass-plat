@@ -32,6 +32,10 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
   ],
+  serverMiddleware: [
+    { path: '/api/consumer/get', handler: '~/api/consumer/list.js' },
+    { path: '/api/consumer/add', handler: '~/api/consumer/add.js' },
+  ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {},
