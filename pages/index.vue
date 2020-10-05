@@ -32,8 +32,8 @@ export default Vue.extend({
     }
   },
   mounted() {
-    this.$axios('/api/consumer/list').then((res) => {
-      console.log(res)
+    this.$axios('/api/consumer/get/?shang=123').then((res) => {
+      this.data = res.data
     })
   },
 })

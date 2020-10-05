@@ -1,3 +1,4 @@
+import { URL } from 'url'
 import mysql from 'mysql'
 
 const connection = mysql.createConnection({
@@ -8,12 +9,16 @@ const connection = mysql.createConnection({
 })
 
 connection.connect()
-export default (req, res) => {
-  const key = req.key
-  const pageVal = 20
-  const page = req.page || 1
 
-  const syl = `select * from customers where name like %${key}% or tel like %${key}% limit ${
+export default (req, res) => {
+  const pageVal = 20
+  const query = new URL('http://localhost' + req.originalUrl).searchParams
+  const page = query.get('page') || 1
+  const condition = query.get('key')
+    ? `where name like %${query.get('key')}% or tel like %${query.get('key')}%`
+    : ''
+
+  const syl = `select * from customers ${condition} limit ${
     (page - 1) * pageVal
   }, ${pageVal}`
 
@@ -21,6 +26,7 @@ export default (req, res) => {
     if (err) {
       res.end('error')
     }
+    res.writeHead(200, { 'Content-Type': 'text/plain;charset=utf-8' })
     res.end(JSON.stringify(result))
   })
 }
