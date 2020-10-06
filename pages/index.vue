@@ -12,7 +12,7 @@
       placeholder="请输入搜索关键词(姓名或手机号)"
       @search="getData"
     />
-    <van-cell-group>
+    <van-cell-group v-if="data.length > 0">
       <van-cell v-for="item in data" :key="item.id">
         <template #title>
           <span>{{ item.name }}</span>
@@ -40,6 +40,7 @@
         <van-loading type="spinner">加载中...</van-loading>
       </div>
     </van-cell-group>
+    <van-empty v-else description="未找到匹配记录" />
   </div>
 </template>
 

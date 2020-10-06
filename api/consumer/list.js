@@ -11,7 +11,7 @@ const connection = mysql.createConnection({
 connection.connect()
 
 export default (req, res) => {
-  const pageVal = 20
+  const pageVal = 50
   const query = new URL('http://localhost' + req.originalUrl).searchParams
   const page = query.get('page') || 1
   const condition = query.get('keyword')
