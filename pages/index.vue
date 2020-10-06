@@ -5,22 +5,30 @@
       right-text="添加"
       @click-right="onClickRight"
     />
-    <!-- <div class="table">
-      <el-table :data="data" style="width: 100%">
-        <el-table-column prop="name" label="姓名" width="180">
-        </el-table-column>
-        <el-table-column prop="tel" label="电话" width="180"> </el-table-column>
-        <el-table-column prop="vocation" label="职业"> </el-table-column>
-        <el-table-column prop="lens" label="镜片"> </el-table-column>
-        <el-table-column prop="frame" label="镜架"> </el-table-column>
-        <el-table-column prop="lefteye" label="左眼"> </el-table-column>
-        <el-table-column prop="righteye" label="右眼"> </el-table-column>
-        <el-table-column prop="distance" label="瞳距"> </el-table-column>
-        <el-table-column prop="price" label="价格"> </el-table-column>
-        <el-table-column prop="date" label="日期"> </el-table-column>
-        <el-table-column prop="mark" label="备注"> </el-table-column>
-      </el-table>
-    </div> -->
+    <van-cell-group>
+      <van-cell v-for="item in data" :key="item.id">
+        <template #title>
+          <span>{{ item.name }}</span>
+          <van-tag type="danger">{{ item.vocation }}</van-tag>
+        </template>
+        <template #label>
+          <span class="info-item"
+            >镜片：{{ item.lens }} / 镜架：{{ item.frame }}</span
+          >
+          <span class="info-item"
+            >左眼：{{ item.lefteye }} / 右眼：{{ item.righteye }} / 瞳距：{{
+              item.distance
+            }}</span
+          >
+          <span v-if="item.mark" class="info-item">备注：{{ item.mark }}</span>
+        </template>
+        <template #default>
+          <span class="info-item">{{ item.tel }}</span>
+          <span v-if="item.price" class="info-item">{{ item.price }}元</span>
+          <span v-if="item.date" class="info-item">{{ item.date }}</span>
+        </template>
+      </van-cell>
+    </van-cell-group>
   </div>
 </template>
 
@@ -35,13 +43,13 @@ export default Vue.extend({
   },
   mounted() {
     this.$axios({
-      url: '/api/consumer/add',
-      method: 'post',
+      url: '/api/consumer/get',
+      method: 'get',
       data: JSON.stringify({
         name: 123,
       }),
     }).then((res) => {
-      // this.data = res.data
+      this.data = res.data
     })
   },
   methods: {
@@ -51,3 +59,8 @@ export default Vue.extend({
   },
 })
 </script>
+<style>
+.info-item {
+  display: block;
+}
+</style>
