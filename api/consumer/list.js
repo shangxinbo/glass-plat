@@ -14,14 +14,15 @@ export default (req, res) => {
   const pageVal = 20
   const query = new URL('http://localhost' + req.originalUrl).searchParams
   const page = query.get('page') || 1
-  const condition = query.get('key')
-    ? `where name like %${query.get('key')}% or tel like %${query.get('key')}%`
+  const condition = query.get('keyword')
+    ? `where name like '%${query.get('keyword')}%' or tel like '%${query.get(
+        'keyword'
+      )}%'`
     : ''
 
   const syl = `select * from customers ${condition} limit ${
     (page - 1) * pageVal
   }, ${pageVal}`
-
   connection.query(syl, function (err, result) {
     if (err) {
       res.end(JSON.stringify({ code: -1, message: 'error' }))
