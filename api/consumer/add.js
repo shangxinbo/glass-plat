@@ -32,15 +32,15 @@ export default (req, res) => {
         }","${data.date || ''}","${data.mark || ''}","${now}")`
       connection.query(syl, function (err, result) {
         if (err) {
-          res.end(err.message)
+          res.end(JSON.stringify({ code: -1, message: err.message }))
         }
-        res.end(JSON.stringify(result))
+        res.end(JSON.stringify({ code: 0, data: result }))
       })
     } else {
       res.writeHead(200, { 'Content-Type': 'text/plain;charset=utf-8' })
       res.end(
         JSON.stringify({
-          code: 3,
+          code: -2,
           error: '名字或电话必须填写',
         })
       )
