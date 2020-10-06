@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <van-nav-bar title="添加客户" left-arrow @back="back" />
+    <van-nav-bar title="添加客户" left-arrow @click-left="back" />
     <van-form @submit="onSubmit">
       <van-field
         v-model="name"

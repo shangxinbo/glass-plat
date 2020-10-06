@@ -24,9 +24,9 @@ export default (req, res) => {
 
   connection.query(syl, function (err, result) {
     if (err) {
-      res.end('error')
+      res.end(JSON.stringify({ code: -1, message: 'error' }))
     }
     res.writeHead(200, { 'Content-Type': 'text/plain;charset=utf-8' })
-    res.end(JSON.stringify(result))
+    res.end(JSON.stringify({ code: 0, data: result }))
   })
 }
