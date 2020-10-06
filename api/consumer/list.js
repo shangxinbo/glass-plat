@@ -20,7 +20,7 @@ export default (req, res) => {
       )}%'`
     : ''
 
-  const syl = `select * from customers ${condition} limit ${
+  const syl = `select * from customers ${condition} order by update_time desc limit ${
     (page - 1) * pageVal
   }, ${pageVal}`
   connection.query(syl, function (err, result) {

@@ -16,7 +16,6 @@
       <van-cell v-for="item in data" :key="item.id">
         <template #title>
           <span>{{ item.name }}</span>
-          <van-tag type="danger">{{ item.vocation }}</van-tag>
         </template>
         <template #label>
           <span class="info-item"
@@ -33,7 +32,9 @@
         <template #default>
           <span class="info-item">{{ item.tel }}</span>
           <span v-if="item.price" class="info-item">{{ item.price }}元</span>
-          <span v-if="item.date" class="info-item">{{ item.date }}</span>
+          <span v-if="item.update_time" class="info-item">{{
+            item.update_time | date_format
+          }}</span>
         </template>
       </van-cell>
       <div style="text-align: center; height: 4rem; line-height: 4rem">
@@ -47,8 +48,14 @@
 <script>
 import Vue from 'vue'
 import { Toast } from 'vant'
+import dayjs from 'dayjs'
 
 export default Vue.extend({
+  filters: {
+    date_format(val) {
+      return dayjs(val).format('YYYY-MM-DD')
+    },
+  },
   data: () => {
     return {
       data: [],

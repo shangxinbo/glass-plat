@@ -35,8 +35,8 @@ export default {
   serverMiddleware: [
     { path: '/api/consumer/get', handler: '~/api/consumer/list.js' },
     { path: '/api/consumer/add', handler: '~/api/consumer/add.js' },
-    { path: '/api/consumer/mark', handler: '~/api/consumer/convert.js' },
-    { path: '/api/consumer/initdata', handler: '~/api/consumer/initdata.js' },
+    // { path: '/api/consumer/mark', handler: '~/api/consumer/convert.js' },
+    // { path: '/api/consumer/initdata', handler: '~/api/consumer/initdata.js' },
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)

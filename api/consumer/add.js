@@ -22,14 +22,12 @@ export default (req, res) => {
       // 有手机号或者姓名就行
       const syl =
         'insert into customers ' +
-        '(name,tel,vocation,lens,frame,righteye,lefteye,distance,price,date,mark,update_time) value ' +
-        `("${data.name || ''}", "${data.tel || ''}", "${
-          data.vocation || ''
-        }","${data.lens || ''}","${data.frame || ''}","${
-          data.righteye || ''
-        }","${data.lefteye || ''}","${data.distance || ''}","${
-          data.price || ''
-        }","${data.date || ''}","${data.mark || ''}","${now}")`
+        '(name,tel,lens,frame,righteye,lefteye,distance,price,mark,update_time) value ' +
+        `("${data.name || ''}", "${data.tel || ''}","${data.lens || ''}","${
+          data.frame || ''
+        }","${data.righteye || ''}","${data.lefteye || ''}","${
+          data.distance || ''
+        }","${data.price || ''}","${data.mark || ''}","${now}")`
       connection.query(syl, function (err, result) {
         if (err) {
           res.end(JSON.stringify({ code: -1, message: err.message }))
