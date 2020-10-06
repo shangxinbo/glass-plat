@@ -2,7 +2,7 @@ import { URL } from 'url'
 import mysql from 'mysql'
 
 const connection = mysql.createConnection({
-  host: 'localhost',
+  host: process.env.NUXT_ENV_DB_HOST,
   user: 'root',
   database: process.env.NUXT_ENV_DB,
   password: process.env.NUXT_ENV_DB_PWD,
