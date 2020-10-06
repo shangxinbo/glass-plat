@@ -5,6 +5,10 @@
       right-text="添加"
       @click-right="onClickRight"
     />
+    <van-search
+      v-model="keyword"
+      placeholder="请输入搜索关键词(姓名或手机号)"
+    />
     <van-cell-group>
       <van-cell v-for="item in data" :key="item.id">
         <template #title>
@@ -39,6 +43,7 @@ export default Vue.extend({
   data: () => {
     return {
       data: [],
+      keyword: '',
     }
   },
   mounted() {
@@ -60,6 +65,11 @@ export default Vue.extend({
 })
 </script>
 <style>
+.container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+}
 .info-item {
   display: block;
 }
